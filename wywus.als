@@ -50,7 +50,7 @@ pred ProdutoLigadoMercado{
 
 -- Garantia de que se um usuário administra um grupo, então ele também participa desse grupo
 pred seAdministraParticipa{
-	all u:Usuario, b:Grupo |  b.administradoPor = u => u.participa =  b
+	all u:Usuario, b:Grupo |  b.administradoPor = u => u.participa in  b
 }
 
 --Todos os modelos devem possuir um e somente um sistema
@@ -103,6 +103,12 @@ fact{
 	qtdPrecos
 	qtdDeRelatorioDeCompras
 }
+
+assert supermercadoOferecerProdutoImplicaEmProdutoTerPreco{
+	all p:Produto | #p.~vende >= #p.custa + #p.melhorCusto 
+}
+
+
 
 pred show[] {}
 run show for 25
